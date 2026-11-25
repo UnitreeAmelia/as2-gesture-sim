@@ -1,0 +1,11 @@
+# 手部识别推理运行时与模型（约 17MB），不纳入版本库
+# 缺失时 js/hand-tracker.js 自动回退到 jsDelivr CDN
+# 想完全离线运行，把这两个目录放回根目录即可（代码优先读本地）
+wasm/
+models/
+
+# 系统与编辑器
+.DS_Store
+.vscode/
+.idea/
+node_modules/

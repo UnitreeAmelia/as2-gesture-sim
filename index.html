@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#07080c" />
+<title>AS2 · 手势遥操作</title>
+<link rel="stylesheet" href="css/style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+
+<div id="viewport"></div>
+<div class="vignette"></div>
+
+<video id="cam" playsinline muted autoplay></video>
+
+<div class="hud" id="hud">
+  <header class="hud-top">
+    <div class="brand">
+      <div class="brand-mark">
+        <span class="led"></span>
+        <b>AS2</b>
+      </div>
+      <div class="brand-lines">
+        <h1>手势遥操作</h1>
+        <p>Gesture Teleop · unitree_sdk2</p>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="chip" id="btn-skeleton" aria-pressed="true" title="显示手部骨架">骨架</button>
+      <button class="chip" id="btn-preview" aria-pressed="true" title="显示摄像头画面">镜头</button>
+      <button class="chip" id="btn-cam" aria-pressed="true" title="切换跟随 / 侧视">跟随</button>
+      <button class="chip" id="btn-fullscreen" title="全屏">全屏</button>
+    </div>
+  </header>
+
+  <div class="hud-bottom">
+    <div class="status" id="status">
+      <span class="dot"></span>
+      <span id="status-text">待命</span>
+    </div>
+
+    <div class="telemetry">
+      <div class="meter-row">
+        <span class="meter-name">前进</span>
+        <div class="meter-track"><div class="meter-fill" id="bar-vx"></div></div>
+        <span class="meter-num" id="num-vx">0.00</span>
+      </div>
+      <div class="meter-row">
+        <span class="meter-name">转向</span>
+        <div class="meter-track"><div class="meter-fill" id="bar-vyaw"></div></div>
+        <span class="meter-num" id="num-vyaw">0</span>
+      </div>
+      <div class="meter-row">
+        <span class="meter-name">步频</span>
+        <div class="meter-track"><div class="meter-fill" id="bar-freq"></div></div>
+        <span class="meter-num" id="num-freq">0.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="preview" id="preview">
+    <div class="preview-frame">
+      <video id="preview-video" playsinline muted autoplay></video>
+      <canvas id="preview-overlay"></canvas>
+    </div>
+    <span class="preview-label">HAND</span>
+  </div>
+</div>
+
+<div class="gate" id="gate">
+  <div class="gate-inner">
+    <div class="gate-mark"><span class="led"></span>AS2</div>
+    <h2 class="gate-title">手势遥操作</h2>
+    <p class="gate-sub">一只手，把机器狗开起来</p>
+
+    <ul class="gate-steps">
+      <li><i>01</i><span>举起手掌，掌心朝向摄像头</span></li>
+      <li><i>02</i><span>抬高手掌 — 前进，压低 — 后退</span></li>
+      <li><i>03</i><span>左右移动 — 转向，捏合拇指食指 — 刹车</span></li>
+    </ul>
+
+    <button class="btn-primary" id="btn-start">
+      <span class="btn-label">开启摄像头</span>
+      <span class="btn-spinner" aria-hidden="true"></span>
+    </button>
+    <button class="btn-ghost" id="btn-mouse">不用摄像头，用鼠标试试</button>
+
+    <p class="gate-note" id="gate-note">所有识别在本机完成，画面不上传</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
